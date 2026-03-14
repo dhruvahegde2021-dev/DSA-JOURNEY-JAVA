@@ -3,19 +3,13 @@
 // Space Complexity: O(1)
 class Solution {
     public String largestOddNumber(String num) {
-        String odd="";
-        String temp="";
-        if(num.isEmpty())
-            return num;
-        for(int i=1;i<=num.length();i++)
+        for(int i=num.length()-1;i>=0;i--)
         {
-            temp=num.substring(0,i);
-            char c=temp.charAt(temp.length()-1);
-            if(c=='1'||c=='3' || c=='5' || c=='7' || c=='9')
-                odd=temp;
-            else
-                continue;
+            if(num.charAt(i)%2!=0)
+            {
+                return num.substring(0,i+1);
+            }
         }
-        return odd;
+        return "";
     }
 }
