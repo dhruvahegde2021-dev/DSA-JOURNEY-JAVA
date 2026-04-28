@@ -1,22 +1,21 @@
 // Pattern: Sliding Window
 // Time Complexity: O(n)
-// Space Complexity: O(n)
+// Space Complexity: O(1)
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        int[] seen=new int[128];
-        Arrays.fill(seen,-1);
+        Set<Character> st=new HashSet<>();
         int left=0;
-        int maxLength=0;
+        int max=0;
         for(int right=0;right<s.length();right++)
         {
-            char c=s.charAt(right);
-            if(seen[c]>=left)
+            while(st.contains(s.charAt(right)))
             {
-                left=seen[c]+1;
+                st.remove(s.charAt(left));
+                left++;
             }
-            seen[c]=right;
-            maxLength=Math.max(maxLength,right-left+1);
+            st.add(s.charAt(right));
+            max=Math.max(max,right-left+1);
         }
-        return maxLength;
+        return max;
     }
 }
