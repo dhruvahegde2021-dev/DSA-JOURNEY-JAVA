@@ -1,33 +1,31 @@
-// Pattern: Stacks
-// Time Complexity: O(n)
-// Space Complexity: O(n)
 class Solution {
     public int evalRPN(String[] tokens) {
-        Deque<String> stack=new ArrayDeque<>();
-        String expr="+-*/";
-        for(String s:tokens)
-        {   
-            if(expr.contains(s))
+        Stack<Integer> st=new Stack<>();
+        for(String c:tokens)
+        {
+            if(c.equals("+"))
             {
-                int right=Integer.parseInt(stack.pop());
-                int left=Integer.parseInt(stack.pop());
-                switch(s)
-                {
-                    case "+": stack.push(String.valueOf(left+right));
-                              break;
-                    case "-": stack.push(String.valueOf(left-right));
-                              break;
-                    case "*": stack.push(String.valueOf(left*right));
-                              break;
-                    case "/": stack.push(String.valueOf(left/right));
-                              break;
-                }
+                st.push(st.pop()+st.pop());
+            }
+            else if(c.equals("-"))
+            {
+                int temp=st.pop();
+                st.push(st.pop()-temp);
+            }
+            else if(c.equals("*"))
+            {
+                st.push(st.pop()*st.pop());
+            }
+            else if(c.equals("/"))
+            {
+                int temp=st.pop();
+                st.push(st.pop()/temp);
             }
             else
             {
-                stack.push(s);
+                st.push(Integer.parseInt(c));
             }
         }
-        return Integer.parseInt(stack.pop());
+        return st.pop();
     }
 }
