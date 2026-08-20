@@ -1,0 +1,16 @@
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        PriorityQueue<Integer> minheap=new PriorityQueue<>();
+        for(int stone:stones)
+            minheap.offer(-stone);
+        while(minheap.size()>1)
+        {
+            int first=minheap.poll();
+            int second=minheap.poll();
+            if(second>first)
+                minheap.offer(first-second);
+        }
+        minheap.offer(0);
+        return Math.abs(minheap.peek());
+    }
+}
