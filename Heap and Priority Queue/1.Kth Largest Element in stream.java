@@ -1,3 +1,6 @@
+// Pattern:Heap and Priority Queue
+// Time Complexity: O(nlogn)
+// Space Complexity: O(n)
 class KthLargest {
     PriorityQueue<Integer> minheap;
     int k;
